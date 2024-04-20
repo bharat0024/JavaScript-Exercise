@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const danger = () => {
+            alert('Mana kiya fir bhi...!,\n chal bhag yaha che..\n\nMouse enter')
+        }
+        const keyboard = (e, id) => {
+
+            alert(e.key + "\n" + id + " is triggered")
+            if (document.getElementById(id).innerHTML == "Waiting for key hit..")
+                document.getElementById(id).innerHTML = e.key
+            else
+                document.getElementById(id).innerHTML += e.key
+        }         
+    </script>
+    <style>
+        td {
+            min-width: 100px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Nature</h1>
+    <table border="1" cellspacing="1" cellpadding="10" onscroll="alert('scroll working')">
+        <tr>
+            <th>Video Event</th>
+            <td><video src="../nature.mp4" height="100px" style="border-radius: 10px;" controls
+                    onerror="alert('video not found...')"></video><br></td>
+            <td><video src="./nature.mp4" height="100px" style="border-radius: 10px;" controls
+                    onplay="alert('video is playing now')" onpause="alert('video is paused')" on
+                    onresize="()=>alert('video is resized')"></video><br></td>
+            <td><video src="./nature.mp4" height="100px" style="border-radius: 10px;" controls
+                    onpause="alert('video is paused')"></video></td>
+            <td><video src="./nature.mp4" height="100px" style="border-radius: 10px;" controls
+                    onseeked="alert('voice stated')"></video><br></td>
+            <td><video src="./nature.mp4" height="100px" style="border-radius: 10px;" controls
+                    oncanplay="alert('still video is loading')"></video><br></td>
+            <td><video src="./nature.mp4" height="100px" style="border-radius: 10px;" controls
+                    onended="alert('all video is watched...')"></video><br></td>
+            <td><video src="../nature.mp4" height="100px" style="border-radius: 10px;" controls
+                    onabort="alert('mission aborted...')"></video><br></td>                    
+        </tr>
+        <tr>
+            <th>Mouse Event</th>
+            <td>
+                <label for="" onmouseenter="alert('undhar undar aavyou...')">Mouse Enter</label>
+            </td>
+            <td>
+                <label for="" onmousedown="alert('mouse button press thayu.. ,bhai... bhai...')">Mouse Down</label>
+            </td>
+            <td>
+                <label for="" onmouseleave="alert('undar gayo..')">Mouse Leave</label>
+            </td>
+            <td>
+                <label for="" onmousemove="alert('undar hare fare che..')">Mouse Move</label>
+            </td>
+            <td>
+                <label for="" onmouseout="alert('get out from my class')">Mouse Out</label>
+            </td>
+            <td>
+                <label for="" onmouseover="alert('mouse over thayu')">Mouse Over</label>
+            </td>
+            <td>
+                <label for="" onmouseup="alert('mouse up')">Mouse Up</label>
+            </td>
+            <td>
+                <label for="" onmousewheel="alert('chakdol fare')">Mouse Wheel</label>
+            </td>
+        </tr>
+        <tr>
+            <th>Control Event</th>
+            <td><button id="btn1"
+                    style="background-color: #e82e2e;border-radius: 10px;border:none; padding: 25px;color:aliceblue;font-weight: bold;font-size: large;"
+                    onclick="danger()">This is Danger</button><br><br></td>
+            <td><label for="fcs">Focus: </label><input id="fcs" type="text"
+                    onfocus="alert('focus on your goal, not in this box..!!')"></td>
+            <td><input type="radio" name="rdo" id="rdo" onchange="alert('state is chages')"> <label for="rdo">try to
+                    click me</label><input type="radio" name="rdo" id="rdo" onchange="alert('state is chages')"></td>
+            <td><input type="button" ondblclick="alert('button clicked twise...')" value="hit me 2x"></td>
+            <td><input type="text" onblur="alert('kidhar chale..\nonblur')" placeholder="connect with me"></td>
+            <td><input type="button" oncontextmenu="alert('not allowed to open context menu\nright click press')"
+                    value="oncontextmenu triggered"></td>
+            <td><input type="number" oninput="alert('bas itna hi..!!')" placeholder="pasa fek tamasa dekh"></td>
+        </tr>
+        <tr>
+            <th>Keyboard Event</th>
+            <td><label for="" id='onkeypress'>Waiting for key hit..(onkeypress)</label>
+                <input type="text" onkeypress="keyboard(event,'onkeypress')">
+            </td>
+            <td>
+                <label for="" id='onkeydown'>Waiting for key hit..(on)</label>
+                <input type="text" onkeydown="keyboard(event,'onkeydown')">
+            </td>
+        </tr>
+        <tr>
+            <th>Drag Event</th>
+            <td>
+                <label for="" draggable="true" ondragstart="alert('drag start')" ondrop="alert('drop')">Try To Pull
+                    me</label>
+            </td>
+            <td>
+                <input type="text" dropzone ondragenter="alert('put here')" ondragover="alert('drag over')">
+            </td>
+        </tr>
+        <tr>
+            <th>Form Event</th>
+            <td>
+                <form action="" onsubmit="alert('data gayo...')">
+                    <input type="text" name="" id="">
+                    <button type="submit">submit me</button>
+                </form>
+            </td>
+            <td>
+                <form action="" onreset="alert('you try to reset data  as default')">
+                    <input type="text" name="" id="">
+                    <button type="reset">reset</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <script>
+        const getRandomColor=()=> {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+        document.querySelectorAll('td').forEach((item) => {
+            item.style.backgroundColor = getRandomColor();
+        })
+    </script>
+</body>
+
+</html>

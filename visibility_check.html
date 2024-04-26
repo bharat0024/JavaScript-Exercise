@@ -68,7 +68,7 @@
         let lblTime = document.getElementById("time");
         localStorage.setItem("level", 1);
         localStorage.setItem("time", 60);
-
+        localStorage.removeItem("view");
         // Timer
         const watch = setInterval(() => {
             if (Number(localStorage.getItem("time")) == 0)
@@ -115,6 +115,13 @@
             if (status && !isPaused) {
                 localStorage.setItem("level", Number(localStorage.getItem("level")) + 1);
                 document.getElementById("score").innerHTML = Number(localStorage.getItem("level")) - 1;
+                if (Number(localStorage.getItem("level")) > Number(localStorage.getItem('levelUp'))) {
+                    if (!localStorage.getItem('view')) {
+                        localStorage.setItem("view", true);
+                        alert("Level Up..");
+                    }
+                    localStorage.setItem("levelUp", Number(localStorage.getItem("level")));
+                }
                 tblGenerator();
                 localStorage.setItem("time", 60);
             }
@@ -128,25 +135,24 @@
         const tblGenerator = () => {
             let tblHtml = '';
             let level = Number(localStorage.getItem("level"));
-            if (level < 10) {
-                let color = colorGenerator();
-                let currRow = Math.floor(Math.random() * (level + 1));
-                let currCol = Math.floor(Math.random() * (level + 1));
-                for (let row = 0; row <= level; row++) {
-                    tblHtml += "<tr>";
-                    for (let col = 0; col <= level; col++) {
-                        if ((currRow === row) && (currCol === col))
-                            tblHtml += `<td id='${row}-${col}' onclick="btnClick(true)" style='background:${color};opacity:0.5'></td>`;
-                        else
-                            tblHtml += `<td id='${row}-${col}' onclick="btnClick(false)" style='background:${color};'></td>`;
-                    }
-                    tblHtml += "</tr>";
+            level = (level <= 10) ? level : 10;
+            let color = colorGenerator();
+            if (level > 10) {
+                document.body.style.background = colorGenerator();
+            }
+            let currRow = Math.floor(Math.random() * (level + 1));
+            let currCol = Math.floor(Math.random() * (level + 1));
+            for (let row = 0; row <= level; row++) {
+                tblHtml += "<tr>";
+                for (let col = 0; col <= level; col++) {
+                    if ((currRow === row) && (currCol === col))
+                        tblHtml += `<td id='${row}-${col}' onclick="btnClick(true)" style='background:${color};opacity:0.5'></td>`;
+                    else
+                        tblHtml += `<td id='${row}-${col}' onclick="btnClick(false)" style='background:${color};'></td>`;
                 }
-                table.innerHTML = tblHtml;
+                tblHtml += "</tr>";
             }
-            else {
-                alert("Well Done..!, Game is Over")
-            }
+            table.innerHTML = tblHtml;
         }
 
         //game handler
